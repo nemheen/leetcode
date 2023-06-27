@@ -3,17 +3,13 @@ class Solution:
         n = len(word1)
         m = len(word2)
 
-        minn = min(m, n)
-
+        minn = min(n, m)
         ans = ""
-        i = 0
         for i in range(minn):
-           ans += word1[i]
-           ans += word2[i]
-        
+          ans += word1[i]
+          ans += word2[i]
         if n > m:
-            ans += word1[minn:]
-        else: ans+= word2[minn:]
-
-        return ans
-            
+          ans += word1[minn::]
+        else:
+          ans += word2[minn::]
+        return ans            
