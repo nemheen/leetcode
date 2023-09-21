@@ -4,11 +4,11 @@ class Solution:
     def isBipartite(self, graph):
 
 
-        def dfs(vertex, group):
+        def dfs(v, group):
             # Assign the current vertex to the specified group
-            groups[vertex] = group
+            groups[v] = group
 
-            for neighbor in graph[vertex]:
+            for neighbor in graph[v]:
                 if neighbor not in groups:
                     # If the neighbor is not assigned to a group, assign it to the opposite group
                     if not dfs(neighbor, 1 - group):
@@ -23,10 +23,10 @@ class Solution:
         groups = {}
 
         # Iterate through all vertices in the graph
-        for vertex in range(len(graph)):
-            if vertex not in groups:
+        for v in range(len(graph)):
+            if v not in groups:
                 # Start DFS from unassigned vertices with group 0
-                if not dfs(vertex, 0):
+                if not dfs(v, 0):
                     return False
 
         return True
