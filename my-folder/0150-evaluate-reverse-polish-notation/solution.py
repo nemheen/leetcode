@@ -1,25 +1,28 @@
 class Solution:
     def evalRPN(self, tokens: List[str]) -> int:
-        st = []
-        for t in tokens:
-            if t in "+-*/":
-                op1 = st[-1]  # Get the top element of the stack
-                st.pop()      # Remove the top element
-                op2 = st[-1]  # Get the second-to-top element of the stack
-                st.pop()      # Remove the second-to-top element
+        res = 0
+        ops = "+-/*"
+        stack = []
 
-                if t == "+":
-                    op = op2 + op1
-                elif t == "-":
-                    op = op2 - op1
-                elif t == "*":
-                    op = op2 * op1
-                elif t == "/":
-                    op = op2 / op1
-                st.append(int(op))
-            else:
-                st.append(int(t))
-        return st[0]
+        for i in range(len(tokens)):
+            if tokens[i] not in ops:
+                stack.append(int(tokens[i]))
+            elif len(stack) >= 2:
+                one = stack.pop()
+                two = stack.pop()
+                if tokens[i] == '+':
+                    res = two + one
+                elif tokens[i] == '-':
+                    res = two - one
+                elif tokens[i] == '/':
+                    # Check for division by zero
+                    if one != 0:
+                        res = int(two / one)
+                    else:
+                        return "Error: Division by zero"
+                else:
+                    res = two * one
+                stack.append(res)
 
+        return stack[-1]
 
-        
