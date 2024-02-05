@@ -4,10 +4,9 @@ class Solution:
             if not node:
                 return 0
 
-            count = int(node.val == targetSum)
-            count += dfs(node.left, targetSum - node.val)
+            count = int(node.val==targetSum)
             count += dfs(node.right, targetSum - node.val)
-
+            count += dfs(node.left, targetSum - node.val)
             return count
 
         if not root:
